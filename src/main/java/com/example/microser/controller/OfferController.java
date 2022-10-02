@@ -27,12 +27,17 @@ public class OfferController {
         return offerService.getById(id);
     }
 
+    @GetMapping("/findByTitle/{title}")
+    public Optional<OfferEntity> pullByTitle(@PathVariable String title){
+        return offerService.getByTitle(title);
+    }
+
     @EventListener(ApplicationReadyEvent.class)
     public void fillDB() {
-        OfferEntity offerEntity = new OfferEntity(1L, "JavaDeveloper", 12000);
-        saveOffer(offerEntity);
-        OfferEntity offerEntity1 = new OfferEntity(2L, "PythonDeveloper", 15000);
+        OfferEntity offerEntity1 = new OfferEntity(1L, "PythonDeveloper", 15000);
         saveOffer(offerEntity1);
+        OfferEntity offerEntity2 = new OfferEntity(2L, "JavaDeveloper", 9000);
+        saveOffer(offerEntity2);
     }
 
     private OfferEntity saveOffer(OfferEntity offerEntity) {
